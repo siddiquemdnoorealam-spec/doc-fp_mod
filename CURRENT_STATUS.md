@@ -1,56 +1,35 @@
-# Current Status
-
-This file shows the current project state.
-
-## Project Mode
-
-Existing module continuation.
-
-This is not a fresh project from zero.
-
-## Current Repositories
-
-Document repo:
-https://github.com/siddiquemdnoorealam-spec/doc-fp_mod
-
-Custom module repo:
-https://github.com/siddiquemdnoorealam-spec/fp-mod-17
-
-Reference module repo:
-https://github.com/siddiquemdnoorealam-spec/reference-mod-17
-
-## Current Setup Status
-
-- [ ] Existing custom modules uploaded to `fp-mod-17`
-- [ ] Reference modules uploaded to `reference-mod-17`
-- [ ] Documentation files uploaded to `doc-fp_mod`
-- [ ] Existing module structure reviewed
-- [ ] Current module status confirmed
-
 ## Current Task
+fp_order_cancel review and safe implementation planning.
 
-Upload existing modules and reference modules, then start project continuation.
+## Observed Status
+- Existing module continuation confirmed.
+- `fp_retail_base` exists and provides shared retail POS config flags.
+- `fp_quick_checkout` exists and reuses Odoo PaymentScreen validation/finalization.
+- `fp_order_history` exists and provides POS previous order search/details.
+- `fp_order_return_exchange` exists and patches `FPOrderHistoryScreen`.
+- `fp_order_cancel` does not exist in current `fp-mod-17/pos_fp_17`.
 
-## Completed
+## fp_order_cancel Planning Status
+Status: Planned / Not created yet.
 
-None confirmed yet.
+Recommended dependency:
+- point_of_sale
+- fp_retail_base
+- fp_order_history
 
-## In Progress
+Recommended relation:
+- Add cancel action by patching `FPOrderHistoryScreen`.
+- Reuse order history access/domain logic.
+- Do not patch quick checkout payment flow.
 
-Initial repo setup.
-
-## Known Issues From Previous Work
-
-- Previous chat became heavy/loading during POS order cancel phase.
-- Quick checkout compatibility needs careful checking.
-- Partial return flow previously had `lineState` undefined error.
-- Negative amount/payment confirm button issue must be checked if related module exists.
+## Safety Decision
+Do not blindly cancel paid/done/invoiced POS orders by only writing `state = cancel`.
+Odoo 17 has an unused POS cancel method that only changes state, so safe implementation must validate accounting, invoice, payment, stock, and session risks.
 
 ## Next Recommended Step
-
-After uploading modules:
-
-1. Ask ChatGPT to read existing modules from `fp-mod-17`.
-2. Ask ChatGPT to prepare current module status.
-3. Update `MODULE_MAP.md`.
-4. Start the next issue/task.
+Create issue branch `feature/fp-order-cancel` and implement first safe version:
+- config flag
+- backend validation RPC
+- cancel button in order history
+- reason/confirmation popup
+- block unsafe confirmed states unless a proper reversal/refund workflow is approved.
