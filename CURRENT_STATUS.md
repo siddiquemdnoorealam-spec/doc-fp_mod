@@ -1,85 +1,99 @@
-# Current Status
+## Project
 
-This file shows the latest project state.
+FP Odoo 17 POS custom modules.
 
-## Project Mode
+## Repositories
 
-Existing Odoo 17 POS/module continuation project.
+- Document repo: `doc-fp_mod`
+- Custom module repo / branch: `fp-mod-17 / pos_fp_17`
+- Reference module repo: `reference-mod-17`
 
-This is not a fresh project from zero. Existing modules in `fp-mod-17/tree/pos_fp_17` must be treated as the current project state before any new module or bug fix.
+## Current Main Task
 
-## Current Repositories
+`fp_order_cancel` basic module
 
-Document repo:
-https://github.com/siddiquemdnoorealam-spec/doc-fp_mod
+## Current Status
 
-Custom module repo / branch:
-https://github.com/siddiquemdnoorealam-spec/fp-mod-17/tree/pos_fp_17
+Status: **Success**
 
-Reference module repo:
-https://github.com/siddiquemdnoorealam-spec/reference-mod-17
+The basic `fp_order_cancel` module skeleton has been created and tested successfully.
 
-## Current Setup Status
+## Completed in This Task
 
-- [x] Final simplified workflow selected.
-- [x] GitHub Issue/branch requirement removed.
-- [x] Document repo selected as permanent source of truth.
-- [x] Custom module repo/branch selected as working module source.
-- [x] Reference repo selected for behavior/workflow study only.
-- [ ] First project chat started.
-- [ ] Existing modules observed from `fp-mod-17/tree/pos_fp_17`.
-- [ ] Current module status confirmed.
-- [ ] `fp_order_cancel` basic module created.
-- [ ] `fp_order_cancel` cancel feature implemented.
-- [ ] `fp_order_cancel` final compatibility test completed.
+Created module:
 
-## Current Task
+- `fp_order_cancel`
 
-Start the FP Odoo 17 POS Cancel Module project and observe existing modules.
+The module is a safe skeleton only. It does not implement the final cancel, refund, delete, or reversal workflow yet.
 
-## Current State
+## Confirmed Test Result
 
-Documentation files are prepared. The next step is to start the ChatGPT Project and ask it to read documentation and observe the existing module repo before writing code.
+User tested and confirmed:
 
-## Completed Work
+- Module installs successfully.
+- Module appears in Apps.
+- POS config opens successfully.
+- Order cancel option appears in POS config.
+- Order cancel option can be enabled.
+- Cancel button appears in POS Order History.
+- Clicking the Cancel button currently does nothing, as expected for this safe skeleton phase.
+- Server log is clean.
+- Browser console is clean.
 
-- Final fixed process selected.
-- Task flow reduced to three main tasks:
-  1. `fp_order_cancel basic module`
-  2. `fp_order_cancel cancel feature`
-  3. `fp_order_cancel test and final cleanup`
-- Documentation update rules finalized.
-- Code output rule finalized: code tasks must provide module ZIP when code is created or changed.
+## Current Safety State
 
-## Known Issues From Previous Work
+Cancel/Delete remains blocked or inactive by default.
 
-### BUG-001 — Quick checkout return lineState undefined
+The current module does not:
 
-Status:
-Open / To be rechecked.
+- Blindly write `state = cancel`.
+- Delete POS orders.
+- Cancel paid POS orders.
+- Cancel done POS orders.
+- Cancel invoiced POS orders.
+- Create refund/reversal/accounting entries.
+- Modify or break `fp_quick_checkout`.
 
-Error:
-`TypeError: can't access property "lineState", this is undefined`
+## Current Module Dependencies
 
-Affected/related modules:
-- `fp_quick_checkout`
+`fp_order_cancel` depends on:
+
+- `point_of_sale`
+- `fp_retail_base`
 - `fp_order_history`
+
+## Current Integration
+
+`fp_order_cancel` integrates with `fp_order_history`.
+
+The skeleton adds:
+
+- POS config placeholders.
+- Backend validation placeholder methods.
+- Order history cancel policy placeholder.
+- POS Order History Cancel button placeholder.
+- Safe blocked behavior for cancel actions.
+
+## Current Blockers
+
+No blocker.
+
+## Next Safe Task
+
+Next task should be:
+
+`fp_order_cancel cancel feature`
+
+The next task should implement a safe cancel request flow while keeping paid/done/invoiced POS orders blocked unless a safe refund/reversal workflow is approved.
+
+## Important Rule for Next Task
+
+Before writing the next code change, observe the existing modules again from `fp-mod-17 / pos_fp_17`, especially:
+
+- `fp_retail_base`
+- `fp_order_history`
+- `fp_quick_checkout`
 - `fp_order_return_exchange`
 
-### BUG-002 — Quick checkout negative amount/payment confirm inactive
-
-Status:
-Open / To be rechecked.
-
-Affected/related modules:
-- `fp_quick_checkout`
-- return/negative payment flow if related
-
-## Next Recommended Step
-
-Start the first project chat:
-
-1. Read documentation from `doc-fp_mod`.
-2. Observe existing modules in `fp-mod-17/tree/pos_fp_17`.
-3. Prepare current project status.
-4. Confirm the next safe task for creating `fp_order_cancel`.
+Do not copy code from reference modules.
+Reference modules may be used only for workflow/UI behavior study.
