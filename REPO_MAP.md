@@ -1,56 +1,43 @@
 # Repository Map
 
-This file records all repositories used by the project.
+## Document Repo
 
-## 1. Document Repository
-
-Repo:  
+URL:
 https://github.com/siddiquemdnoorealam-spec/doc-fp_mod
 
 Purpose:
+Permanent source of truth for project documentation, current status, handoff, chat log, bug log, and module map.
 
-- Permanent documentation source of truth
-- Current project status
-- Latest handoff
-- Chat/task history
-- Bug/error history
-- Module relationship map
+Update:
+Keep this repo permanently. Do not delete it.
 
-Important:
+---
 
-- This repo should not be deleted.
-- This repo stores project memory and documentation.
-- No custom Odoo module source code should be placed here.
+## Custom Module Repo / Branch
 
-## 2. Custom Module Repository
-
-Repo / branch:  
+URL:
 https://github.com/siddiquemdnoorealam-spec/fp-mod-17/tree/pos_fp_17
 
 Purpose:
+Working repository/branch for custom Odoo 17 modules.
 
-- Temporary working repo for custom Odoo 17 modules
-- Existing module continuation work
-- New custom modules under `fp_` namespace
+Expected path:
+`pos_fp_17` branch should contain existing FP modules and new `fp_order_cancel`.
 
-Important:
+Update:
+This repo/branch can be temporary or replaceable, but important project memory must stay in `doc-fp_mod`.
 
-- This repo/branch contains the current working module code.
-- Existing modules must be observed before making new code.
-- This repo may be temporary, so important summaries must be saved in `doc-fp_mod`.
+---
 
-## 3. Reference Module Repository
+## Reference Module Repo
 
-Repo:  
+URL:
 https://github.com/siddiquemdnoorealam-spec/reference-mod-17
 
 Purpose:
+Reference modules/archive for behavior/workflow/UI study only.
 
-- Store reference modules / archives
-- Study workflow, behavior, and UI idea
-- Do not copy-paste reference code
-
-Important:
-
-- Reference code is not the final implementation.
-- Final custom implementation must be fresh and under `fp_` namespace.
+Rules:
+- Do not copy reference code directly.
+- Use reference modules only to understand feature behavior and implementation direction.
+- Final implementation must be fresh `fp_` custom code.
