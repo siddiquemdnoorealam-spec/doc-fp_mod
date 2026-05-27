@@ -1,60 +1,67 @@
 # Bug Log
 
-This file tracks bugs/errors in a short clean format.
+This file tracks bugs/errors found during the project.
 
-The user will provide raw error message, Odoo log, browser console error, and issue/branch/module info.
+Update rule:
 
-ChatGPT will convert that into a clean bug summary for this file.
-
-## BUG-001: Quick checkout return lineState undefined
-
-Status:
-Open / To be verified
-
-Affected modules:
-- fp_quick_checkout
-- fp_order_history
-- fp_order_return_exchange
-
-Error:
-TypeError: can't access property "lineState", this is undefined
-
-Context:
-Partial return quantity update or unselecting non-return product previously caused this frontend error.
-
-Expected result:
-Return/product line update should not crash the POS screen.
-
-Actual result:
-POS frontend crashed with `lineState` undefined.
-
-Next action:
-Verify whether this bug exists in the uploaded current modules. If still present, create a bugfix issue and branch.
-
-Suggested branch:
-bugfix/quick-checkout-line-state-error
+- Add new bugs under old bugs.
+- Do not delete old bugs.
+- When a bug is fixed, update its status.
+- Full raw logs can be kept in the ChatGPT chat or external issue/comment, but the clean summary should be kept here.
 
 ---
 
-## BUG-002: Quick checkout negative payment confirm button inactive
+## BUG-001 — Quick checkout return lineState undefined
 
-Status:
-Open / To be verified
+Status: Open / To be rechecked
 
 Affected modules:
-- fp_quick_checkout
+
+- `fp_quick_checkout`
+- `fp_order_history`
+- `fp_order_return_exchange` if exists
+
+Error:
+
+```text
+TypeError: can't access property "lineState", this is undefined
+```
 
 Context:
-With quick checkout, after selecting payment method and negative amount, confirm button previously stayed inactive.
+
+Partial return quantity update or unselecting non-return product previously caused this error.
 
 Expected result:
-Valid return/negative payment flow should allow confirmation when Odoo payment rules are satisfied.
 
-Actual result:
-Confirm button stayed inactive.
+- Partial return quantity update should work safely.
+- Non-return/unselected lines should not crash POS frontend.
 
-Next action:
-Verify against current uploaded module code and test flow.
+Current action:
 
-Suggested branch:
-bugfix/negative-payment-confirm-button
+- Recheck after existing modules are observed.
+- Must be tested again before or during `fp_order_cancel` compatibility testing.
+
+---
+
+## BUG-002 — Quick checkout negative amount/payment confirm inactive
+
+Status: Open / To be rechecked
+
+Affected modules:
+
+- `fp_quick_checkout`
+- return/negative payment flow if related
+
+Context:
+
+After selecting payment method and using a negative amount/return flow, confirm button previously stayed inactive.
+
+Expected result:
+
+- Payment method selection should allow valid confirmation when the order/payment state is valid.
+- Normal checkout should not break.
+
+Current action:
+
+- Recheck after existing modules are observed.
+- Must be tested during quick checkout compatibility testing.

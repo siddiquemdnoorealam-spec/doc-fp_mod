@@ -1,35 +1,64 @@
+# Current Status
+
+This file shows the current project state.
+
+## Project Mode
+
+Existing module continuation.
+
+This is not a fresh project from zero.
+
+## Current Repositories
+
+Document repo:  
+https://github.com/siddiquemdnoorealam-spec/doc-fp_mod
+
+Custom module repo / branch:  
+https://github.com/siddiquemdnoorealam-spec/fp-mod-17/tree/pos_fp_17
+
+Reference module repo:  
+https://github.com/siddiquemdnoorealam-spec/reference-mod-17
+
+## Current Setup Status
+
+- [x] Documentation structure prepared
+- [ ] `CHAT_LOG.md` uploaded to `doc-fp_mod`
+- [ ] Existing custom modules reviewed from `fp-mod-17/tree/pos_fp_17`
+- [ ] Reference modules confirmed in `reference-mod-17`
+- [ ] Current module status confirmed by ChatGPT after observing repos
+
 ## Current Task
-fp_order_cancel review and safe implementation planning.
 
-## Observed Status
-- Existing module continuation confirmed.
-- `fp_retail_base` exists and provides shared retail POS config flags.
-- `fp_quick_checkout` exists and reuses Odoo PaymentScreen validation/finalization.
-- `fp_order_history` exists and provides POS previous order search/details.
-- `fp_order_return_exchange` exists and patches `FPOrderHistoryScreen`.
-- `fp_order_cancel` does not exist in current `fp-mod-17/pos_fp_17`.
+Start the existing FP Odoo 17 POS module continuation project.
 
-## fp_order_cancel Planning Status
-Status: Planned / Not created yet.
+## Current State
 
-Recommended dependency:
-- point_of_sale
-- fp_retail_base
-- fp_order_history
+Documentation workflow is being prepared. Existing modules should be observed before creating or changing any module.
 
-Recommended relation:
-- Add cancel action by patching `FPOrderHistoryScreen`.
-- Reuse order history access/domain logic.
-- Do not patch quick checkout payment flow.
+## Completed Work
 
-## Safety Decision
-Do not blindly cancel paid/done/invoiced POS orders by only writing `state = cancel`.
-Odoo 17 has an unused POS cancel method that only changes state, so safe implementation must validate accounting, invoice, payment, stock, and session risks.
+- Simplified workflow selected.
+- GitHub issue/branch requirement removed from the workflow.
+- Document repo will be the permanent source of truth.
+- `fp-mod-17/tree/pos_fp_17` will be used as the current custom module working branch.
+- `reference-mod-17` will be used for reference behavior/workflow study.
+
+## In Progress
+
+- Preparing documentation files.
+- Preparing first project chat command.
+
+## Known Issues From Previous Work
+
+- Previous chat became heavy/loading during POS order cancel phase.
+- Quick checkout compatibility needs careful checking.
+- Partial return flow previously had `lineState` undefined error.
+- Negative amount/payment confirm button issue must be checked if related module exists.
 
 ## Next Recommended Step
-Create issue branch `feature/fp-order-cancel` and implement first safe version:
-- config flag
-- backend validation RPC
-- cancel button in order history
-- reason/confirmation popup
-- block unsafe confirmed states unless a proper reversal/refund workflow is approved.
+
+1. Upload/commit these documentation files to `doc-fp_mod`.
+2. Start the ChatGPT Project with the agreed Project Instructions.
+3. In the first project chat, ask ChatGPT to read docs and observe `fp-mod-17/tree/pos_fp_17`.
+4. Prepare current module status.
+5. Start `fp_order_cancel review` as the first main module task if appropriate.

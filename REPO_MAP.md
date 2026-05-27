@@ -1,70 +1,56 @@
 # Repository Map
 
-This file explains where each type of project data should be stored.
+This file records all repositories used by the project.
 
-## 1. Document Repo
+## 1. Document Repository
 
-Repository:
+Repo:  
 https://github.com/siddiquemdnoorealam-spec/doc-fp_mod
 
 Purpose:
-Documentation source of truth.
 
-Contains:
-- README.md
-- START_HERE_FOR_CHATGPT.md
-- REPO_MAP.md
-- MODULE_MAP.md
-- CURRENT_STATUS.md
-- CHAT_HANDOFF.md
-- BUG_LOG.md
+- Permanent documentation source of truth
+- Current project status
+- Latest handoff
+- Chat/task history
+- Bug/error history
+- Module relationship map
 
-Does not contain custom module source code.
+Important:
 
-## 2. Custom Module Repo
+- This repo should not be deleted.
+- This repo stores project memory and documentation.
+- No custom Odoo module source code should be placed here.
 
-Repository:
-https://github.com/siddiquemdnoorealam-spec/fp-mod-17
+## 2. Custom Module Repository
+
+Repo / branch:  
+https://github.com/siddiquemdnoorealam-spec/fp-mod-17/tree/pos_fp_17
 
 Purpose:
-Stores our own custom Odoo 17 modules.
 
-Recommended structure:
+- Temporary working repo for custom Odoo 17 modules
+- Existing module continuation work
+- New custom modules under `fp_` namespace
 
-```text
-fp-mod-17/
-├── README.md
-└── addons/
-    ├── fp_retail_base/
-    ├── fp_quick_checkout/
-    ├── fp_order_history/
-    ├── fp_order_return_exchange/
-    ├── fp_order_cancel/
-    └── other fp_ modules
-```
+Important:
 
-Rule:
-Before any new work, observe existing modules in this repo.
+- This repo/branch contains the current working module code.
+- Existing modules must be observed before making new code.
+- This repo may be temporary, so important summaries must be saved in `doc-fp_mod`.
 
-## 3. Reference Module Repo
+## 3. Reference Module Repository
 
-Repository:
+Repo:  
 https://github.com/siddiquemdnoorealam-spec/reference-mod-17
 
 Purpose:
-Stores reference modules or reference archives used only for studying behavior/workflow.
 
-Recommended structure:
+- Store reference modules / archives
+- Study workflow, behavior, and UI idea
+- Do not copy-paste reference code
 
-```text
-reference-mod-17/
-├── README.md
-└── archives/
-    ├── ref_a01.zip
-    ├── ref_a02.zip
-    ├── ref_a03.zip
-    └── ref_a04.zip
-```
+Important:
 
-Rule:
-Reference modules must not be copied directly into our custom modules.
+- Reference code is not the final implementation.
+- Final custom implementation must be fresh and under `fp_` namespace.

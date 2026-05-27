@@ -1,40 +1,33 @@
-# FP Odoo 17 Module Documentation
+# FP Odoo 17 Existing POS Module Continuation
 
-This repository is the documentation source of truth for the FP Odoo 17 module development project.
+This repository is the permanent documentation and memory source for the FP Odoo 17 POS module continuation project.
 
 ## Purpose
 
-This project continues existing Odoo 17 modules that were already created earlier.
-
-This repo stores:
-- current project status
-- existing module relationship
-- bug/error summary
-- handoff summary from one short ChatGPT chat to the next
-- next task direction
+This is not a fresh project from zero. Some custom modules were already created earlier and are stored in the custom module repository branch.
 
 ## Main Repositories
 
-Document repo:
-https://github.com/siddiquemdnoorealam-spec/doc-fp_mod
+- Document repo: https://github.com/siddiquemdnoorealam-spec/doc-fp_mod
+- Custom module repo / branch: https://github.com/siddiquemdnoorealam-spec/fp-mod-17/tree/pos_fp_17
+- Reference module repo: https://github.com/siddiquemdnoorealam-spec/reference-mod-17
 
-Custom module repo:
-https://github.com/siddiquemdnoorealam-spec/fp-mod-17
+## Core Workflow
 
-Reference module repo:
-https://github.com/siddiquemdnoorealam-spec/reference-mod-17
+- Use simple task-based chats.
+- One main task should be handled in one short ChatGPT chat where possible.
+- Multiple messages inside the same chat are allowed for error, fix, and success.
+- Existing modules must be observed before creating or changing any module.
+- Reference modules are only for workflow/behavior/UI study.
+- Do not copy-paste reference module code.
+- All custom modules must use the `fp_` prefix.
 
-## Simple Workflow
+## Documentation Files
 
-1. Existing custom modules are stored in `fp-mod-17`.
-2. Reference modules are stored in `reference-mod-17`.
-3. Documentation/status/handoff/bug summaries are stored in this repo.
-4. Before creating a new module or fixing a bug, ChatGPT must observe existing modules first.
-5. The user provides only issue info, error/log info, or success status.
-6. ChatGPT provides repo-ready updates for the relevant documentation files.
-
-## Important Rule
-
-This is not a fresh project from zero unless the user explicitly says so.
-
-Always observe existing modules in `fp-mod-17` before creating a new module or changing code.
+- `START_HERE_FOR_CHATGPT.md` — project rules and starting context
+- `REPO_MAP.md` — repository links and purpose
+- `MODULE_MAP.md` — custom module list and relationships
+- `CURRENT_STATUS.md` — latest project state
+- `CHAT_HANDOFF.md` — latest handoff for next chat
+- `CHAT_LOG.md` — numbered chat/task summary history
+- `BUG_LOG.md` — bug/error history

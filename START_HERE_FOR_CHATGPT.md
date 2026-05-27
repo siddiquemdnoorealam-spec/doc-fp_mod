@@ -1,71 +1,79 @@
 # START HERE FOR CHATGPT
 
-This is the first file ChatGPT should read before working on this project.
-
-## Project Type
-
-Existing Odoo 17 POS/module continuation project.
-
-This is not a fresh project from zero. Some modules were already created earlier and will be uploaded into the custom module repo.
+This project is for continuing existing Odoo 17 POS modules that were already created earlier.
 
 ## Repositories
 
-Document repo:
+Document repo:  
 https://github.com/siddiquemdnoorealam-spec/doc-fp_mod
 
-Custom module repo:
-https://github.com/siddiquemdnoorealam-spec/fp-mod-17
+Custom module repo / branch:  
+https://github.com/siddiquemdnoorealam-spec/fp-mod-17/tree/pos_fp_17
 
-Reference module repo:
+Reference module repo:  
 https://github.com/siddiquemdnoorealam-spec/reference-mod-17
 
-## Core Rule
+## Project Mode
 
-Before creating any new module, fixing any bug, or changing existing code:
+Existing module continuation.
 
-1. Observe the current custom modules in `fp-mod-17`.
-2. Check module dependencies and relationships.
-3. Check `MODULE_MAP.md`.
-4. Check `CURRENT_STATUS.md`.
-5. Check `CHAT_HANDOFF.md`.
-6. Check `BUG_LOG.md`.
+This is not a fresh project from zero.
 
-Do not start from scratch unless the user clearly says it is a new clean/base project.
+## Main Rules
 
-## Naming Rule
+1. Before creating any new module or fixing any bug, first observe existing modules in `fp-mod-17/tree/pos_fp_17`.
+2. Do not start from zero unless the user explicitly says this is a new clean project.
+3. Existing modules must be treated as the current project state.
+4. Always check relation with existing modules before writing new code.
+5. Especially check these modules if they exist:
+   - `fp_retail_base`
+   - `fp_quick_checkout`
+   - `fp_order_history`
+   - `fp_order_return_exchange`
+   - `fp_order_cancel`
+6. All new custom modules must use the `fp_` prefix.
+7. Reference modules are for studying workflow, behavior, and UI flow only.
+8. Do not copy-paste reference module code.
+9. During testing/bug-fix phase, do not increment module version unless the user explicitly asks.
+10. Keep this project context inside the ChatGPT Project only.
 
-All custom modules created for this project must use the `fp_` prefix.
+## Simple Chat Workflow
 
-Examples:
-- fp_retail_base
-- fp_quick_checkout
-- fp_order_history
-- fp_order_return_exchange
-- fp_order_cancel
+The user will provide only:
 
-## Reference Rule
+- Task name and module name
+- Error message and Odoo/browser logs if error happens
+- Success/test status if test succeeds
 
-Reference modules are only for studying workflow, behavior, UI flow, data flow, feature relation, and implementation idea.
+ChatGPT will provide:
 
-Do not copy-paste reference module code.
+- Code / fix / implementation plan
+- Test steps
+- `CHAT_HANDOFF.md` update
+- `CHAT_LOG.md` entry
+- `CURRENT_STATUS.md` update
+- `BUG_LOG.md` update when needed
+- `MODULE_MAP.md` update when module relation changes
 
-## User Input Rule
+## New Chat Start Instruction
 
-The user will usually provide only:
-- issue info
-- branch name
-- module name
-- error message and Odoo/browser log if there is an error
-- success/test status if the task is completed
+For each new main task, first read:
 
-ChatGPT must convert that information into repo-ready updates for:
-- CHAT_HANDOFF.md
-- CURRENT_STATUS.md
-- BUG_LOG.md
-- MODULE_MAP.md when needed
+- `START_HERE_FOR_CHATGPT.md`
+- `REPO_MAP.md`
+- `MODULE_MAP.md`
+- `CURRENT_STATUS.md`
+- `CHAT_HANDOFF.md`
+- `CHAT_LOG.md`
+- `BUG_LOG.md`
 
-## Development Rule
+Then observe the current custom module repo branch before writing code.
 
-One task = one GitHub issue = one GitHub branch = one short ChatGPT chat.
+## Document Update Rules
 
-Avoid long overloaded chats.
+- `CHAT_HANDOFF.md` = replace with latest handoff after a main task ends or pauses.
+- `CHAT_LOG.md` = append one numbered summary entry after each main task/chat ends.
+- `CURRENT_STATUS.md` = update after task result, blocker, or next task change.
+- `BUG_LOG.md` = append new bugs; do not delete old bugs. Update bug status when fixed.
+- `MODULE_MAP.md` = update only when module/dependency/relation changes.
+- `REPO_MAP.md` = one-time setup; update only if repo links or repo purpose change.

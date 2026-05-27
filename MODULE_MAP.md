@@ -1,40 +1,187 @@
 # Module Map
 
-This file tracks all custom modules and their relationships.
+This file tracks custom modules, their purpose, and relationships.
 
-## Current Mode
+## Project Rule
 
-Existing module continuation mode.
+All custom modules must start with `fp_`.
 
-Existing modules should be added here after they are uploaded to the custom module repo.
+## Existing / Expected Core Modules
 
-## Core Modules To Observe First
+### fp_retail_base
 
-When available in `fp-mod-17`, always check these modules before creating/fixing related features:
+Purpose:
 
-| Module | Purpose | Status | Depends On | Related Modules |
-|---|---|---|---|---|
-| fp_retail_base | Foundation/common helper module | To be confirmed | point_of_sale | all POS modules |
-| fp_quick_checkout | 3-column quick checkout screen | To be confirmed | fp_retail_base, point_of_sale | payment, return, order history |
-| fp_order_history | Previous POS order/history flow | To be confirmed | point_of_sale | return, cancel, reprint |
-| fp_order_return_exchange | Return/exchange flow | To be confirmed | fp_order_history | quick checkout, cancel |
-| fp_order_cancel | POS order cancel flow | To be confirmed | fp_order_history | quick checkout, return/exchange |
+- Shared base/foundation module for FP retail POS modules
+- Common POS settings/helpers/config flags
 
-## Module Update Rule
+Depends:
 
-When a new module is created or uploaded, add/update:
-- module name
-- purpose
-- dependency
-- related modules
-- status
+- `point_of_sale`
 
-## Status Values
+Related:
 
-Use simple status:
-- Planned
-- Uploaded
-- In Progress
-- Testing
-- Stable
-- Blocked
+- Used by other FP POS modules as a base/foundation module
+
+Status:
+
+- Existing module should be observed from `fp-mod-17/tree/pos_fp_17`
+
+---
+
+### fp_quick_checkout
+
+Purpose:
+
+- Quick checkout / custom POS screen flow
+- Must keep payment validation/finalization compatible with Odoo POS
+
+Depends:
+
+- `point_of_sale`
+- `fp_retail_base` if implemented that way
+
+Related:
+
+- Must be tested when order history, return/exchange, or order cancel changes
+- Known previous risk: negative amount/payment confirm issue
+
+Status:
+
+- Existing module should be observed before changes
+
+---
+
+### fp_order_history
+
+Purpose:
+
+- Previous POS order search/list/details inside POS
+
+Depends:
+
+- `point_of_sale`
+- `fp_retail_base` if implemented that way
+
+Related:
+
+- `fp_order_reprint`
+- `fp_order_return_exchange`
+- `fp_order_cancel`
+
+Status:
+
+- Existing module should be observed before adding cancel action
+
+---
+
+### fp_order_return_exchange
+
+Purpose:
+
+- POS return/exchange flow
+- Returned quantity tracking and partial return logic
+
+Depends:
+
+- `point_of_sale`
+- `fp_order_history` if implemented that way
+
+Related:
+
+- `fp_quick_checkout`
+- `fp_order_cancel`
+
+Known risk:
+
+- Previous partial return flow had `lineState` undefined error
+
+Status:
+
+- Existing module should be observed before order cancel compatibility testing
+
+---
+
+### fp_order_reprint
+
+Purpose:
+
+- Reprint previous POS order receipts/reports
+
+Depends:
+
+- `point_of_sale`
+- `fp_order_history` if implemented that way
+
+Related:
+
+- `fp_order_history`
+
+Status:
+
+- Existing module should be observed if reprint/order details flow is affected
+
+---
+
+### fp_bag_charges
+
+Purpose:
+
+- Add bag charge product/line in POS
+
+Status:
+
+- Existing module should be observed if present
+
+---
+
+### fp_default_customer
+
+Purpose:
+
+- Auto-set default/walk-in customer in POS
+
+Status:
+
+- Existing module should be observed if present
+
+---
+
+### fp_product_view_switch
+
+Purpose:
+
+- Switch POS product view layout/grid/list/card behavior
+
+Status:
+
+- Existing module should be observed if present
+
+---
+
+### fp_order_cancel
+
+Purpose:
+
+- POS confirmed order cancel behavior from order history/details
+
+Recommended dependencies:
+
+- `point_of_sale`
+- `fp_retail_base`
+- `fp_order_history`
+
+Recommended relation:
+
+- Add cancel action by extending/patching order history screen/details
+- Reuse order history access/search/details logic
+- Do not patch quick checkout payment flow unless absolutely required
+
+Safety rule:
+
+- Do not blindly cancel paid/done/invoiced POS orders by only writing `state = cancel`
+- Must validate config, permission, payment/accounting/invoice/stock/session/report risk
+
+Status:
+
+- Planned / to be confirmed from `fp-mod-17/tree/pos_fp_17`
